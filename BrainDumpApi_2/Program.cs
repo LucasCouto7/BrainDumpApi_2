@@ -1,4 +1,5 @@
 using BrainDumpApi_2.Context;
+using BrainDumpApi_2.DTOs.Mappings;
 using BrainDumpApi_2.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,9 @@ builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<INotaRepository, NotaRepository>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddAutoMapper(typeof(NotaDTOMappingProfile));
+
 
 var app = builder.Build();
 

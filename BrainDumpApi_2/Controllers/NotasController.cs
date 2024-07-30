@@ -82,7 +82,7 @@ namespace BrainDumpApi_2.Controllers
             var nota = await _uof.NotaRepository.GetAsync(n => n.Id == id);
             if (nota is null)
             {
-                return NotFound("Nota não encontrado...");
+                return NotFound("Nota não encontrada...");
             }
             var NotaDTO = _mapper.Map<NotaDTO>(nota);
             return Ok(NotaDTO);
@@ -104,7 +104,7 @@ namespace BrainDumpApi_2.Controllers
 
             var novoNotaDTO = _mapper.Map<NotaDTO>(novaNota);
 
-            return new CreatedAtRouteResult("ObterNota",
+            return new CreatedAtRouteResult("ObterNotas",
                 new { id = novoNotaDTO.Id }, novoNotaDTO);
         }
     }
