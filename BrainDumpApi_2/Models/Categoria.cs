@@ -8,6 +8,10 @@
 
         public string? Cor { get; set; }
 
+        public DateTime DataCriacao { get; set; }
+
+        public bool Ativo { get; set; }
+
         public ICollection<Nota> Notas { get; } = new List<Nota>();
     }
 }

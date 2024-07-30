@@ -1,4 +1,5 @@
 using BrainDumpApi_2.Context;
+using BrainDumpApi_2.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +15,10 @@ string sqlConn = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<BrainDumpApiContext>(options => options.UseSqlServer(sqlConn));
 
-
+builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+builder.Services.AddScoped<INotaRepository, NotaRepository>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 

@@ -1,8 +1,9 @@
-﻿using System.Text.Json.Serialization;
+﻿using BrainDumpApi_2.Models;
+using System.Text.Json.Serialization;
 
-namespace BrainDumpApi_2.Models
+namespace BrainDumpApi_2.DTOs
 {
-    public class Nota
+    public class NotaDTO
     {
         public int Id { get; set; }
 
@@ -11,10 +12,6 @@ namespace BrainDumpApi_2.Models
         public string? Conteudo { get; set; }
 
         public int? CategoriaId { get; set; }
-
-        public DateTime DataCriacao { get; set; }
-
-        public bool Ativa { get; set; }
 
         [JsonIgnore]
         public Categoria? Categoria { get; set; }
