@@ -6,6 +6,7 @@ using BrainDumpApi_2.Models;
 using X.PagedList;
 using Newtonsoft.Json;
 using BrainDumpApi_2.Pagination;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BrainDumpApi_2.Controllers
 {
@@ -21,6 +22,7 @@ namespace BrainDumpApi_2.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<CategoriaDTO>>> Get()
         {
             var categorias = await _uof.CategoriaRepository.GetAllAsync();
