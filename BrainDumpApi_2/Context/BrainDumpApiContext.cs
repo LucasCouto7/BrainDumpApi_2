@@ -6,10 +6,6 @@ namespace BrainDumpApi_2.Context
 {
     public class BrainDumpApiContext : IdentityDbContext<ApplicationUser>
     {
-        public BrainDumpApiContext()
-        {
-
-        }
         public BrainDumpApiContext(DbContextOptions<BrainDumpApiContext> options) : base(options) 
         {
             

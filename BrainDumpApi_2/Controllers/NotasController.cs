@@ -4,6 +4,7 @@ using BrainDumpApi_2.DTOs;
 using BrainDumpApi_2.Models;
 using BrainDumpApi_2.Pagination;
 using BrainDumpApi_2.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using X.PagedList;
@@ -37,7 +38,7 @@ namespace BrainDumpApi_2.Controllers
             return Ok(notasDto);
         }
 
-
+        [Authorize]
         [HttpGet("pagination")]
         public async Task<ActionResult<IEnumerable<NotaDTO>>> Get([FromQuery]
                                    NotasParameters notasParams)

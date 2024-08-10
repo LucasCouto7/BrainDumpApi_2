@@ -4,6 +4,7 @@ using BrainDumpApi_2.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BrainDumpApi_2.Migrations
 {
     [DbContext(typeof(BrainDumpApiContext))]
-    partial class BrainDumpApiContextModelSnapshot : ModelSnapshot
+    [Migration("20240807202317_AjusteApplicationUser")]
+    partial class AjusteApplicationUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
