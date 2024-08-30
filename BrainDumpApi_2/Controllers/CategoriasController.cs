@@ -7,11 +7,16 @@ using X.PagedList;
 using Newtonsoft.Json;
 using BrainDumpApi_2.Pagination;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.RateLimiting;
+using Microsoft.AspNetCore.Http;
 
 namespace BrainDumpApi_2.Controllers
 {
+    [EnableCors("OrigensComAcessoPermitido")]
     [Route("[controller]")]
     [ApiController]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     public class CategoriasController : ControllerBase
     {
         private readonly IUnitOfWork _uof;
@@ -23,6 +28,9 @@ namespace BrainDumpApi_2.Controllers
 
         [HttpGet]
         [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<IEnumerable<CategoriaDTO>>> Get()
         {
             var categorias = await _uof.CategoriaRepository.GetAllAsync();
@@ -71,6 +79,7 @@ namespace BrainDumpApi_2.Controllers
             return Ok(categoriasDto);
         }
 
+        [DisableCors]
         [HttpGet("{id:int}", Name = "ObterCategoria")]
         public async Task<ActionResult<CategoriaDTO>> Get(int id)
         {
@@ -107,6 +116,9 @@ namespace BrainDumpApi_2.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<CategoriaDTO>> Put(int id, CategoriaDTO categoriaDto)
         {
             if (id != categoriaDto.Id)
@@ -125,6 +137,7 @@ namespace BrainDumpApi_2.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<ActionResult<CategoriaDTO>> Delete(int id)
         {
             var categoria = await _uof.CategoriaRepository.GetAsync(c => c.Id == id);

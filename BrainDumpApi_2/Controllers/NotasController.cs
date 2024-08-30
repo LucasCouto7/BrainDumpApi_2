@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using X.PagedList;
+using Microsoft.AspNetCore.Http;
 
 namespace BrainDumpApi_2.Controllers
 {
@@ -25,6 +26,9 @@ namespace BrainDumpApi_2.Controllers
         }
 
         [HttpGet("notas/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<IEnumerable<NotaDTO>>> GetNotasPorCategoriaAsync(int id)
         {
             var notas = await _uof.NotaRepository.GetNotasPorCategoriaAsync(id);
@@ -38,7 +42,7 @@ namespace BrainDumpApi_2.Controllers
             return Ok(notasDto);
         }
 
-        [Authorize]
+        [Authorize(Policy = "UserOnly")]
         [HttpGet("pagination")]
         public async Task<ActionResult<IEnumerable<NotaDTO>>> Get([FromQuery]
                                    NotasParameters notasParams)
@@ -67,6 +71,9 @@ namespace BrainDumpApi_2.Controllers
 
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<IEnumerable<NotaDTO>>> Get()
         {
             var notas = await _uof.NotaRepository.GetAllAsync();

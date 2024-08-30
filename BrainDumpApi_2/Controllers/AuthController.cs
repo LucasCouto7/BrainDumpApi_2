@@ -32,6 +32,7 @@ namespace BrainDumpApi_2.Controllers
 
         [HttpPost]
         [Route("CreateRole")]
+        [Authorize(Policy = "SuperAdminOnly")]
         public async Task<IActionResult> CreateRole(string roleName)
         {
             var roleExist = await _roleManager.RoleExistsAsync(roleName);
@@ -67,6 +68,7 @@ namespace BrainDumpApi_2.Controllers
 
         [HttpPost]
         [Route("AddUserToRole")]
+        [Authorize(Policy = "SuperAdminOnly")]
         public async Task<IActionResult> AddUserToRole(string email, string roleName)
         {
             var user = await _userManager.FindByEmailAsync(email);
@@ -98,6 +100,7 @@ namespace BrainDumpApi_2.Controllers
 
         [HttpPost]
         [Route("Login")]
+        [Authorize(Policy = "ExclusiveOnly")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
             var user = await _userManager.FindByNameAsync(model.UserName!);
@@ -110,6 +113,7 @@ namespace BrainDumpApi_2.Controllers
                 {
                     new Claim(ClaimTypes.Name, user.UserName!),
                     new Claim(ClaimTypes.Email, user.Email!),
+                    new Claim("id", user.UserName!),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };
 
@@ -171,7 +175,7 @@ namespace BrainDumpApi_2.Controllers
 
             if (!(result).Succeeded)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseModel { Status = "Error", Message = "Falha na criação do usuário" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseModel { Status = "Error", Message = result.Errors!.FirstOrDefault().Description });
             }
 
             return Ok(new ResponseModel { Status = "Success", Message = "Usuário criado com sucesso" });
