@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrainDumpApi_2", "BrainDumpApi_2\BrainDumpApi_2.csproj", "{BCFC27E2-B44E-419B-B053-AD8E6C4BC675}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrainDumpApi_2", "BrainDumpApi_2\BrainDumpApi_2.csproj", "{BCFC27E2-B44E-419B-B053-AD8E6C4BC675}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrainDumpXUnitTest", "BrainDumpXUnitTest\BrainDumpXUnitTest.csproj", "{37B47721-B1C0-4E68-9B8F-A52F557B6B04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{BCFC27E2-B44E-419B-B053-AD8E6C4BC675}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCFC27E2-B44E-419B-B053-AD8E6C4BC675}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCFC27E2-B44E-419B-B053-AD8E6C4BC675}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37B47721-B1C0-4E68-9B8F-A52F557B6B04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37B47721-B1C0-4E68-9B8F-A52F557B6B04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37B47721-B1C0-4E68-9B8F-A52F557B6B04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37B47721-B1C0-4E68-9B8F-A52F557B6B04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

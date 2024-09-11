@@ -85,6 +85,9 @@ namespace BrainDumpApi_2.Controllers
         }
 
         [HttpGet("{id}", Name = "ObterNotas")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<NotaDTO>> Get(int id)
         {
             var nota = await _uof.NotaRepository.GetAsync(n => n.Id == id);
@@ -100,6 +103,9 @@ namespace BrainDumpApi_2.Controllers
 
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<NotaDTO>> Post(NotaDTO NotaDTO)
         {
             if (NotaDTO is null)
